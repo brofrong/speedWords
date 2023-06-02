@@ -9,9 +9,11 @@
   "main": "dist/main/index.cjs",
   "scripts": {
     "dev": "node scripts/watch.mjs",
-    "build": "npm run typecheck && node scripts/build.mjs",
-    "build-local": "npm run typecheck && node scripts/build.mjs && electron-builder --config .electron-builder.config.js",
+    "build": "npm run typecheck && node scripts/build.mjs && electron-builder --config .electron-builder.config.js",
     "typecheck": "tsc --noEmit --project packages/renderer/tsconfig.json"
+  },
+  "build": {
+    "appId": "tk.brofrong.speedwords"
   },
   "engines": {
     "node": ">=14.17.0"
