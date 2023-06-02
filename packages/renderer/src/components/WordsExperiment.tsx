@@ -1,6 +1,8 @@
+import { config } from '@/logic/config';
 import * as _ from 'lodash';
 import { Answer } from 'packages/main/logic/experiment.d';
-import { Accessor, Component, ComponentProps, createSignal, onCleanup, onMount } from 'solid-js';
+import { Accessor, Component, ComponentProps, Show, createSignal, onCleanup, onMount } from 'solid-js';
+import ProgressBar from './ProgressBar';
 
 interface WordsExperimentProps extends ComponentProps<any> {
     words: { id: string; word: string }[],
@@ -16,13 +18,26 @@ const WordsExperiment: Component<WordsExperimentProps> = (props: WordsExperiment
 
     let shuffledQuestions = _.shuffle(props.words);
 
+    let localConfig = config;
+
     const [currentWord, setCurrentWord] = createSignal<{ id: string, word: string }>(shuffledQuestions[wordNumber]);
     const [wordCounter, setWordCounter] = createSignal(wordNumber);
+    const [showDummy, setShowDummy] = createSignal(true);
+
+    function setTimer() {
+        setTimeout(() => {
+            startTime = Date.now();
+            setShowDummy(false);
+        }, config().delay)
+    }
 
     function keyPressed(e: KeyboardEvent) {
+        if (showDummy()) {
+            return;
+        }
         switch (e.code) {
-            case "KeyF": addAnswer('yes'); break;
-            case "KeyJ": addAnswer('no'); break;
+            case config().yes.code: addAnswer('yes'); break;
+            case config().no.code: addAnswer('no'); break;
         }
     }
 
@@ -40,10 +55,13 @@ const WordsExperiment: Component<WordsExperimentProps> = (props: WordsExperiment
         wordNumber++;
         setCurrentWord(shuffledQuestions[wordNumber]);
         setWordCounter(wordNumber);
-        startTime = Date.now();
+
+        setShowDummy(true);
+        setTimer();
     }
 
     onMount(() => {
+        setTimer()
         document.addEventListener('keydown', keyPressed);
     });
 
@@ -51,11 +69,12 @@ const WordsExperiment: Component<WordsExperimentProps> = (props: WordsExperiment
         document.removeEventListener('keydown', keyPressed);
     })
 
+
     return (
         <div class='h-full flex justify-between flex-col items-center p-4'>
-            <div>progress {wordCounter() + 1}/{shuffledQuestions.length}</div>
-            <div>{currentWord().word}</div>
-            <div>F-да / J-нет</div>
+            <Show when={config().showProgressBar} fallback={<div />}><div class='w-full'><ProgressBar progress={(wordCounter()) / shuffledQuestions.length} /></div></Show>
+            <div class='text-2xl whitespace-nowrap overflow-visible'>{showDummy() ? config().dummy : currentWord().word}</div>
+            <div><span>{config().yes.key}</span>-да / <span>{config().no.key}</span>-нет</div>
         </div>
     )
 }

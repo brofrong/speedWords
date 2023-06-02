@@ -9,9 +9,10 @@ interface props {
     class?: JSX.HTMLAttributes<HTMLDivElement>,
     icon?: JSX.Element,
     ref?: HTMLInputElement,
+    value?: string | number,
 }
 
-export const Input: Component<props> = ({ name, id, title, placeholder, onInput, icon, ref }) => {
+export const Input: Component<props> = ({ name, id, title, placeholder, onInput, icon, ref, value }) => {
     return (
         <>
             <Show when={title}>
@@ -24,7 +25,7 @@ export const Input: Component<props> = ({ name, id, title, placeholder, onInput,
                     </div>
                 </Show>
 
-                <input ref={ref} onInput={onInput} type="text" name={name} id={id} class="block w-full rounded-md border-0 py-1.5 pl-1.5 pr-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder={placeholder} />
+                <input ref={ref} onInput={onInput} type="text" name={name} id={id} class="block w-full rounded-md border-0 py-1.5 pl-1.5 pr-0 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder={placeholder} value={value || null} />
             </div>
         </>
     )

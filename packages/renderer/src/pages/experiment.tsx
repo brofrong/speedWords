@@ -34,7 +34,7 @@ const experiment: Component = () => {
                 </Show>
                 <Show when={state() === ExperimentState.Complete}>
                     <div class='h-full flex justify-center items-center flex-col gap-8'>
-                        <div class='text-xl font-bold'>Благодарим за прохождение эксперемента</div>
+                        <div class='text-xl font-bold'>Благодарим за прохождение эксперимента</div>
                         <Link class='underline' href='/'>Вернутся</Link>
                     </div>
                 </Show>

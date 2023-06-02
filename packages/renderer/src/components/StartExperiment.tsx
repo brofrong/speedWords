@@ -24,8 +24,8 @@ const StartExperiment: Component<StartExperimentProps> = (props: StartExperiment
 
 
     return (
-        <div class='h-full justify-center align-middle'>
-            <h2>Нажмите на <b>«Пробел»</b> что бы продолжить</h2>
+        <div class='h-full flex justify-center  items-center'>
+            <h2 class='text-center'>Нажмите на <b>«Пробел»</b> что бы продолжить</h2>
         </div>
     )
 }

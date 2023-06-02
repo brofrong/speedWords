@@ -8,7 +8,6 @@ interface modalProps extends ComponentProps<any> {
 }
 
 const Modal: Component<modalProps> = (props: modalProps) => {
-    const [test] = createSignal()
     let container!: HTMLDivElement;
 
     function isClickedOutside(e: MouseEvent) {
