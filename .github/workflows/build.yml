@@ -26,4 +26,4 @@ jobs:
       - name: Create releases
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "release/0.1.0/mac-universal/SpeedWords.app"
+          artifacts: "release/0.1.0/SpeedWords-0.1.0-Installer.dmg"
