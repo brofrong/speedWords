@@ -1,11 +1,9 @@
 /* @refresh reload */
 import "tailwindcss/tailwind.css";
 
-import "./samples/electron-store";
-
 import { onMount } from "solid-js";
 import { render } from "solid-js/web";
-import { Router, createIntegration } from "solid-app-router";
+import { Router, createIntegration } from "@solidjs/router";
 import App from "./app";
 
 function bindEvent(target: EventTarget, type: string, handler: EventListener) {
@@ -45,7 +43,6 @@ render(() => {
   );
 }, document.getElementById("root") as HTMLElement);
 
-console.log("fs", window.fs);
 console.log("ipcRenderer", window.ipcRenderer);
 
 // Usage of ipcRenderer.on

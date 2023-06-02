@@ -4,8 +4,8 @@
  */
 module.exports = {
   appId: "YourAppID",
-  productName: "YourAppName",
-  copyright: "Copyright © 2022 ${author}",
+  productName: "SpeedWords",
+  copyright: "Copyright © 2023 ${author}",
   asar: true,
   directories: {
     output: "release/${version}",
@@ -28,7 +28,18 @@ module.exports = {
     deleteAppDataOnUninstall: false,
   },
   mac: {
-    target: ["dmg"],
+    "target": [
+      {
+        "target": "dmg",
+        "arch": [
+          "universal"
+        ]
+      },
+      {
+        "target": "dmg"
+      }
+    ],
+    singleArchFiles: true,
     artifactName: "${productName}-${version}-Installer.${ext}",
   },
   linux: {
